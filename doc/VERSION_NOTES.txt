@@ -1,0 +1,51 @@
+0.2.3
+
+edited praatSound.py normalize() function so that it wouldn't just normalize phonemes in the vowel list, but would normalize every interval passed to it
+
+edited Project.py addToWeka() function to make it add all intervals to data, not just vowels
+
+edited Project.py addToWeka() function to make it only print out the first 5 digits after the decimal point
+
+edited Project.py convertTextgrid() so that it would split apart txtgrid files with any number of tiers
+
+edited Project.py createWEKAFile() function so that the "phoneme_type" attribute doesn't use a ready-set list of phonemes, but rather gets the list from the db file itself
+
+added support for flags:
+    --tag = user specified tag to look for (not just FILLEDPAUSE)
+    --tagtier = user specified tier which contains the tag (default=word)
+    --prosodytier = user specified tier over which to do prosodic information extraction
+
+
+
+
+0.2.2
+
+_  not completed
+* completed
+
+Goals:
+
+ * make labeling reversed, i.e. make the phoneme with the middle of the filled pause 
+ * for sphinx, change filled pauses to "ah" and "um"
+ * change surrounding silence measurements to fix them -output ratio of silence vs. voiced for surrounding.  
+ 	xxx occasionally gives a too large value. don't kno why.
+
+ _ make db input/output faster
+	for output, read one and sort through rather than queueing all the time
+	for input, do the begin/process/commit thing
+		xxx doesn't speed it up, though it does seem to work. figure out where the time is being spent.  
+		xxx there's still a lot of writing to disk when there shouldn't be. figure out why.
+
+ *implement plotting
+
+ * fix the problem that comes up with the last 2 files and adding int and NoneType
+     ++this only happens when doing the arff business, b/c the db files have no entries in them
+     WHY DO THEY HAVE NO ENTRIES??!?!???!??!?  
+     arff was being created before all files were done processing - need to do:
+         #makes sure everything closes correctly
+    pool.close()
+    pool.join()
+    in Project file
+  
+ *put helper files in temp folders so they don't clutter up the main folder
+ 
